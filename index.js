@@ -9,7 +9,6 @@ app.use(CORS());
 
 // Middleware to parse JSON body
 app.use(express.json());
-
 // Connect to MongoDB
 mongoose.connect(process.env.MongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
@@ -34,6 +33,10 @@ const getModelForId = id => {
     }
     return Msg;
 };
+
+app.get('/',(req,res)=>{
+    res.send("Api is LIVE");
+})
 
 // Endpoint to handle POST requests for sending messages
 app.post('/SendMessages', async (req, res) => {
