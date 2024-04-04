@@ -54,6 +54,18 @@ app.post('/SendMessages', async (req, res) => {
     }
 });
 
+app.post('/FetchAllMessages',async (req,res)=>{
+    try{
+        const SUID = req.body.SUID;
+        const Msg = getModelForId(SUID);
+        const messages=await Msg.find({});
+        res.status(200).json(messages);
+    }
+    catch(error){
+        res.status(500).json({message: err.message});
+    }
+});
+
 // Endpoint to handle POST requests for getting undelivered messages
 app.post('/GetMessages', async (req, res) => {
     try {
