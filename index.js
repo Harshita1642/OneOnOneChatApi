@@ -47,7 +47,7 @@ app.post('/SendMessages', async (req, res) => {
 
         // Insert data into the dynamically created collection
         const msg = await Msg.create(data);
-        res.status(200).json({ message: 'Message sent successfully', msg });
+        res.status(200).json({ status:'ok' });
     } catch (error) {
         console.error('Error sending message:', error);
         res.status(500).json({ error: 'Internal Server Error' });
