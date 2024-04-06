@@ -58,7 +58,20 @@ app.post('/FetchAllMessages',async (req,res)=>{
     try{
         const SUID = req.body.SUID;
         const Msg = getModelForId(SUID);
+        const messages=await Msg.find({});
+        res.status(200).json(messages);
+    }
+    catch(error){
+        res.status(500).json({message: err.message});
+    }
+});
+
+app.post('/FetchAllDeliveredMessages',async (req,res)=>{
+    try{
+        const SUID = req.body.SUID;
+        const Msg = getModelForId(SUID);
         const messages=await Msg.find({Delivered: true});
+        console.log(messages);
         res.status(200).json(messages);
     }
     catch(error){
