@@ -71,7 +71,7 @@ app.post('/FetchAllDeliveredMessages',async (req,res)=>{
         const SUID = req.body.SUID;
         const Msg = getModelForId(SUID);
         const messages=await Msg.find({Delivered: true});
-        console.log(messages);
+        // console.log(messages);
         res.status(200).json(messages);
     }
     catch(error){
