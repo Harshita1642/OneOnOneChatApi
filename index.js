@@ -58,7 +58,7 @@ app.post('/FetchAllMessages',async (req,res)=>{
     try{
         const SUID = req.body.SUID;
         const Msg = getModelForId(SUID);
-        const messages=await Msg.find({});
+        const messages=await Msg.find({Delivered: true});
         res.status(200).json(messages);
     }
     catch(error){
@@ -76,7 +76,9 @@ app.post('/GetMessages', async (req, res) => {
         const undeliveredMessages = await Msg.find({ Delivered: false });
 
         // Update Delivered status for retrieved messages
-        if(isReciever)await Msg.updateMany({ Delivered: false }, { $set: { Delivered: true } });
+        if(isReciever){
+            await Msg.updateMany({ Delivered: false }, { $set: { Delivered: true } });
+        }
 
         // Send undelivered messages as response
         res.status(200).json({ messages: undeliveredMessages });
